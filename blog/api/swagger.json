@@ -1,9 +1,9 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "This is a simple example NodeJS API project to demonstrate Swagger Documentation",
+        "description": "This is the reddit clone project with some features missing",
         "version": "1.0.0",
-        "title": "Tasks API",
+        "title": "Reddit Clone API",
         "contact": {
             "email": "abc@gmail.com"
         },
@@ -28,7 +28,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/postsResponse"
+                                "$ref": "#/definitions/Post"
                             }
                         }
                     },
@@ -51,14 +51,14 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "task object",
+                        "description": "post object",
                         "required": true,
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "task" : {
+                                "post" : {
                                     "type": "object",
-                                    "$ref": "#/definitions/Task"
+                                    "$ref": "#/definitions/Post"
                                 } 
                             }
                         }
@@ -70,7 +70,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/todosResponse"
+                                "$ref": "#/definitions/postssResponse"
                             }
                         }
                     },
@@ -83,30 +83,30 @@
                 }
             }
         },
-        "/todos/{id}" : {
+        "/posts/{id}" : {
             "put" : {
-                "summary" : "Update the tasks",
-                "description": "Update the tasks",
+                "summary" : "Update the posts",
+                "description": "Update the posts",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "task id that needs to be deleted",
+                        "description": "post id that needs to be updated",
                         "required": true,
                         "type": "string"
                     },
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "task object",
+                        "description": "post object",
                         "required": true,
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "task" : {
+                                "post" : {
                                     "type": "object",
-                                    "$ref": "#/definitions/Task"
+                                    "$ref": "#/definitions/post"
                                 } 
                             }
                         }
@@ -118,7 +118,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/todosResponse"
+                                "$ref": "#/definitions/postssResponse"
                             }
                         }
                     },
@@ -131,16 +131,16 @@
                 }
             }
         },
-        "/todo/{id}" : {
+        "/posts/{id}" : {
             "delete" : {
-                "summary" : "Delete the task",
-                "description": "Delete the task",
+                "summary" : "Delete the post",
+                "description": "Delete the post",
                 "produces": ["application/json"],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "task id that needs to be deleted",
+                        "description": "post id that needs to be deleted",
                         "required": true,
                         "type": "string"
                     }
@@ -151,7 +151,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/todosResponse"
+                                "$ref": "#/definitions/postssResponse"
                             }
                         }
                     },
@@ -166,34 +166,81 @@
         }
     }, 
     "definitions": {
-        "todosResponse": {
+        "postResponse": {
             "type": "object",
             "properties": {
                 "id": {
                      "type": "integer"
                 },
-                "task": {
+                "type": "object",
+            "properties": {
+                "title":{
+                    "type":"string",
+                    "required": true, 
+                    "unique": true
+                }, 
+                "text": {
                     "type": "string"
                 },
-                "assignee": {
-                    "type": "string"
+                "photo":{
+                    "type":"string", 
+                    "required":false
                 },
-                "status": {
-                    "type": "string"
+                "author":{
+                    "type": "string",
+                    "required": true
+                }, 
+                "subreddit":{
+                    "type": "string",
+                    "required": false
+                }, 
+                "comments": {
+                    "type": "array",
+                    "required": false
+            
+                }, 
+                "upvotes": {
+                    "type": "integer"
+                }, 
+                "downvotes": {
+                    "type": "integer"
                 }
             }
+            }
         },
-        "Task": {
+        "Post": {
             "type": "object",
             "properties": {
-                "task": {
+                "title":{
+                    "type":"string",
+                    "required": true, 
+                    "unique": true
+                }, 
+                "text": {
                     "type": "string"
                 },
-                "assignee": {
-                    "type": "string"
+                "photo":{
+                    "type":"string", 
+                    "required":false
                 },
-                "status": {
-                    "type": "string"
+                "author":{
+                    "type": "string",
+                    "required": true
+                }, 
+                "subreddit":{
+                    "type": "string",
+                    "required": false
+                }, 
+                "comments": {
+                    "type": "array",
+                    "required": false
+            
+                }, 
+                "upvotes": {
+                    "type": "integer"
+                }, 
+                "downvotes": {
+                    "type": "integer"
                 }
             }
         },
